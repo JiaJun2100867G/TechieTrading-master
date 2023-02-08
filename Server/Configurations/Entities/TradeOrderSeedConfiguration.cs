@@ -12,8 +12,8 @@ namespace TechieTrading.Server.Configurations.Entities
                 new TradeOrder
                 {
                     Id = 1,
-                    OrderDate = DateTime.Today,
-                    OrderTime = DateTime.Now,
+                    OrderDate = DateTime.Today.Date,
+                    OrderTime = Convert.ToInt32(DateTime.Now.ToString("HH"+"mm"+"ss")),
                     DeliveryType = "Store-Pick-Up",
                     StaffId = 1,
                     CustomerId = 1

@@ -1,0 +1,18 @@
+﻿@page "/sellorderitems/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New SellOrderItem</h3>
+<hr />
+<br />
+
+<FormComponent ButtonText="Create SellOrderItem" sellorderitem="sellorderitem" OnValidSubmit="@CreateSellOrderItem" />
+
+@code {
+    SellOrderItem sellorderitem = new SellOrderItem();
+    private async Task CreateSellOrderItem()
+    {
+        await _client.PostAsJsonAsync(Endpoints.SellOrderItemsEndpoint, sellorderitem);
+        _navManager.NavigateTo("/sellorderitems/");
+    }
+}

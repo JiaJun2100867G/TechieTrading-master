@@ -17,9 +17,13 @@
         </div>
     </div>
     <div class="form-group">
-        <label>Driving License: </label>
+        <label>Gender: </label>
         <div>
-            <InputText @bind-Value="@customer.Gender" class="form-control" />
+            <InputSelect @bind-Value="@customer.Gender" class="form-control">
+            <option value="">-- Select Gender --</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            </InputSelect>
             <ValidationMessage For="@(() => customer.Gender)" />
         </div>
     </div>
@@ -38,7 +42,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label>Date In: </label>
+        <label>Date Of Birth:</label>
         <div>
             <InputDate @bind-Value="@customer.DateOfBirth" class="form-control" />
             <ValidationMessage For="@(() => customer.DateOfBirth)" />

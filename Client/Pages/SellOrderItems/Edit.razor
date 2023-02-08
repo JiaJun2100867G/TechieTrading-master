@@ -1,0 +1,23 @@
+﻿@page "/sellorderitems/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Edit SellOrderItem</h3>
+
+<FormComponent ButtonText="Update" OnValidSubmit="EditSellOrderItem" sellorderitem="sellorderitem" />
+
+@code {
+    [Parameter] public int id { get; set; }
+    SellOrderItem sellorderitem = new SellOrderItem();
+
+    protected async override Task OnParametersSetAsync()
+    {
+        sellorderitem = await _client.GetFromJsonAsync<SellOrderItem>($"{Endpoints.SellOrderItemsEndpoint}/{id}");
+    }
+
+    async Task EditSellOrderItem()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.SellOrderItemsEndpoint}/{id}", sellorderitem);
+        _navManager.NavigateTo("/sellorderitems/");
+    }
+}

@@ -43,7 +43,7 @@ else
                 <td>@Customers.Gender</td>
                 <td>@Customers.Email</td>
                 <td>@Customers.Contact</td>
-                <td>@Customers.DateOfBirth</td>
+                <td>@Customers.DateOfBirth.Value.ToString("dd/MM/yyyy")</td>
                 <td>
                     <a href="/customers/view/@Customers.Id" class="btn btn-primary">
                         <span class="oi oi-book"></span>

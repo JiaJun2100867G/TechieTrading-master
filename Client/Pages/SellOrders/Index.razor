@@ -28,8 +28,8 @@ else
                 <th>OrderDate</th>
                 <th>OrderTime</th>
                 <th>DeliverType</th>
-                <th>StaffId</th>
-                <th>CustomerId</th>
+                <th>Staff</th>
+                <th>Customer</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -37,11 +37,11 @@ else
             @foreach (var SellOrder in SellOrders)
             {
             <tr>
-                <td>@SellOrder.OrderDate</td>
+                <td>@SellOrder.OrderDate.Value.ToString("dd/MM/yyyy")</td>
                 <td>@SellOrder.OrderTime</td>
                 <td>@SellOrder.DeliveryType</td>
-                <td>@SellOrder.StaffId</td>
-                <td>@SellOrder.CustomerId</td>
+                <td>@SellOrder.Staff.FirstName</td>
+                <td>@SellOrder.Customer.FirstName</td>
                 <td>
                     <a href="/sellorders/view/@SellOrder.Id" class="btn btn-primary">
                         <span class="oi oi-book"></span>

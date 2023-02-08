@@ -34,20 +34,22 @@ else
         <tbody>
             @foreach (var TradeOrderItem in TradeOrderItems)
             {
-                <tr>
-                    <td>@TradeOrderItem.Id</td>
-                    <td>
-                        <a href="/tradeorderitems/view/@TradeOrderItem.Id" class="btn btn-primary">
-                            <span class="oi oi-book"></span>
-                        </a>
-                        <a href="/tradeorderitems/edit/@TradeOrderItem.Id" class="btn btn-warning">
-                            <span class="oi oi-pencil"></span>
-                        </a>
-                        <button class="btn btn-danger" @onclick="@(()=>Delete(TradeOrderItem.Id))">
-                            <span class="oi oi-delete"></span>
-                        </button>
-                    </td>
-                </tr>
+            <tr>
+                <td>@TradeOrderItem.Quantity</td>
+                <td>@TradeOrderItem.Id</td>
+                <td>@TradeOrderItem.ProductId</td>
+                <td>
+                    <a href="/tradeorderitems/view/@TradeOrderItem.Id" class="btn btn-primary">
+                        <span class="oi oi-book"></span>
+                    </a>
+                    <a href="/tradeorderitems/edit/@TradeOrderItem.Id" class="btn btn-warning">
+                        <span class="oi oi-pencil"></span>
+                    </a>
+                    <button class="btn btn-danger" @onclick="@(()=>Delete(TradeOrderItem.Id))">
+                        <span class="oi oi-delete"></span>
+                    </button>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

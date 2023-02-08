@@ -12,7 +12,8 @@ namespace TechieTrading.Shared.Domain
         public string Type { get; set; }
         public int Quantity { get; set; }
         public double Price { get; set; }
-        public DateTime ManufactureDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        public DateTime? ManufactureDate { get; set; }
         public List<TradeOrderItem> TradeOrderItem { get; set; }
         public List<SellOrderItem> SellOrderItem { get; set; }
     }
