@@ -25,7 +25,7 @@
                 <option value="">-- Select Delivery Type --</option>
                 <option value="Store-Pick-Up">Store-Pick-Up</option>
                 <option value="Standard-Shipping">Standard-Shipping</option>
-            <</InputSelect>/>
+            </InputSelect>
             <ValidationMessage For="@(() => tradeorder.DeliveryType)" />
         </div>
     </div>
@@ -57,22 +57,6 @@
                     }
             </InputSelect>
             <ValidationMessage For="@(() => tradeorder.CustomerId)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Order Item: </label>
-        <div>
-            <InputSelect @bind-Value="@tradeorder.TradeOrderItem" class="form-control" >
-            <option value="">-- Select Item --</option>
-                    @if (TradeOrderItems != null)
-                    {
-                        foreach (var tradeorderitem in TradeOrderItems)
-                            {
-                                <option value="@tradeorderitem.Id">@tradeorderitem.Product - @tradeorderitem.Quantity</option>
-                            }
-                    }
-                </InputSelect>
-            <ValidationMessage For="@(() => tradeorder.TradeOrderItem)" />
         </div>
     </div>
     @*</fieldset>*@
