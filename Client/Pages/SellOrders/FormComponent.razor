@@ -14,7 +14,7 @@
     <div class="form-group">
         <label>Order Time: </label>
         <div>
-            <InputDate @bind-Value="@sellorder.OrderTime" class="form-control" />
+            <InputNumber type="time" @bind-Value="@sellorder.OrderTime" class="form-control" />
             <ValidationMessage For="@(() => sellorder.OrderTime)" />
         </div>
     </div>
@@ -57,6 +57,22 @@
             <ValidationMessage For="@(() => sellorder.CustomerId)" />
         </div>
     </div>
+    <div class="form-group">
+        <label>Customer: </label>
+        <div>
+            <InputSelect @bind-Value="@sellorder.SellOrderItem" class="form-control" >
+            <option value="">-- Select Item --</option>
+                    @if (SellOrderItems != null)
+                    {
+                        foreach (var sellorderitem in SellOrderItems)
+                            {
+                                <option value="@sellorderitem.Id">@sellorderitem.Product - @sellorderitem.Quantity</option>
+                            }
+                    }
+                </InputSelect>
+            <ValidationMessage For="@(() => sellorder.SellOrderItem)" />
+        </div>
+    </div>
     @*</fieldset>*@
     @if (!Disabled)
     {
@@ -75,10 +91,12 @@
 
     private IList<Staff> Staffs;
     private IList<Customer> Customers;
+    private IList<SellOrderItem> SellOrderItems;
 
     protected async override Task OnInitializedAsync()
     {
         Staffs = await _client.GetFromJsonAsync<List<Staff>>($"{Endpoints.StaffsEndpoint}");
         Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
+        SellOrderItems = await _client.GetFromJsonAsync<List<SellOrderItem>>($"{Endpoints.SellOrderItemsEndpoint}");
     }
 }

@@ -117,7 +117,7 @@ namespace TechieTrading.Server.Migrations
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    ManufactureDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ManufactureDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -254,7 +254,7 @@ namespace TechieTrading.Server.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OrderTime = table.Column<int>(type: "int", nullable: false),
+                    OrderTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeliveryType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StaffId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false)
@@ -283,7 +283,7 @@ namespace TechieTrading.Server.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OrderTime = table.Column<int>(type: "int", nullable: false),
+                    OrderTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeliveryType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StaffId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false)
@@ -400,8 +400,8 @@ namespace TechieTrading.Server.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "StaffRole", "747213a7-ab73-49c9-86c6-7c9e933ecf92", "Staff", "STAFF" },
-                    { "CustomerRole", "74019446-3d5c-4164-9496-584811ead559", "Customer", "CUSTOMER" }
+                    { "StaffRole", "ce9d71ed-de5d-4877-9842-e6c63950227b", "Staff", "STAFF" },
+                    { "CustomerRole", "85f259e3-0277-452c-93cb-b3d5a3636639", "Customer", "CUSTOMER" }
                 });
 
             migrationBuilder.InsertData(
@@ -409,8 +409,8 @@ namespace TechieTrading.Server.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "LocalStaff", 0, "9fe62105-fcba-41e9-9712-b8796b770fb2", "staff@localhost.com", false, "Staff", "Admin", false, null, "STAFF@LOCALHOST.COM", "STAFF", "AQAAAAEAACcQAAAAEBPwHtYPfc8KZuuTzJv16f8zYKQxJCYUDpI4owM0adVIt89uvdjGvFcoC8lh2nsltQ==", null, false, "4124c786-cec7-4cf2-a9a3-5970a3861f88", false, "Staff" },
-                    { "GuestCustomer", 0, "6bbfd129-070b-48be-a342-df53c1a8de1a", "guest@localhost.com", false, "Guest", "Customer", false, null, "GUEST@LOCALHOST.COM", "GUEST", "AQAAAAEAACcQAAAAEFpjdnJO9OoW4O5FRaA4q6Dw8nVFSJ/fN9X36559ck0sYboJ37vT58zEwOVnTI5Y/Q==", null, false, "3e657745-3f37-4ee9-8720-b7d38ef439ce", false, "Guest" }
+                    { "LocalStaff", 0, "3f7d83a9-aa8d-45bf-9ee5-fd27f618821b", "staff@localhost.com", false, "Staff", "Admin", false, null, "STAFF@LOCALHOST.COM", "STAFF", "AQAAAAEAACcQAAAAEKr5CWX1uZO62TlZ2Ctd40j3FOjMulf8VkQOuEjuf+oHG1+qrw/0m1y5n+9vEOv/0A==", null, false, "5982fe3c-b923-4985-a160-5723fdcef589", false, "Staff" },
+                    { "GuestCustomer", 0, "428fab89-1158-4365-a110-b143f86ed398", "guest@localhost.com", false, "Guest", "Customer", false, null, "GUEST@LOCALHOST.COM", "GUEST", "AQAAAAEAACcQAAAAEFI5yXo44G7GEkogydIoaP0UfE46pNXtnDlQSd0iVCzpm1h8oLLN6a5fqjOwx7UyhA==", null, false, "a1c58a88-632a-4527-a22e-bcc23d149d7d", false, "Guest" }
                 });
 
             migrationBuilder.InsertData(
@@ -440,12 +440,12 @@ namespace TechieTrading.Server.Migrations
             migrationBuilder.InsertData(
                 table: "SellOrder",
                 columns: new[] { "Id", "CustomerId", "DeliveryType", "OrderDate", "OrderTime", "StaffId" },
-                values: new object[] { 1, 1, "Standard-Shipping", new DateTime(2023, 2, 8, 0, 0, 0, 0, DateTimeKind.Local), 163459, 1 });
+                values: new object[] { 1, 1, "Standard-Shipping", new DateTime(2023, 2, 8, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2023, 2, 8, 17, 57, 35, 956, DateTimeKind.Local).AddTicks(3623), 1 });
 
             migrationBuilder.InsertData(
                 table: "TradeOrder",
                 columns: new[] { "Id", "CustomerId", "DeliveryType", "OrderDate", "OrderTime", "StaffId" },
-                values: new object[] { 1, 1, "Store-Pick-Up", new DateTime(2023, 2, 8, 0, 0, 0, 0, DateTimeKind.Local), 163459, 1 });
+                values: new object[] { 1, 1, "Store-Pick-Up", new DateTime(2023, 2, 8, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2023, 2, 8, 17, 57, 35, 958, DateTimeKind.Local).AddTicks(1960), 1 });
 
             migrationBuilder.InsertData(
                 table: "SellOrderItem",

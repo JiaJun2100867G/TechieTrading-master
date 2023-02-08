@@ -14,7 +14,7 @@
     <div class="form-group">
         <label>Order Time: </label>
         <div>
-            <InputNumber @bind-Value="@tradeorder.OrderTime" class="form-control" />
+            <InputNumber type="time" @bind-Value="@tradeorder.OrderTime" class="form-control" />
             <ValidationMessage For="@(() => tradeorder.OrderTime)" />
         </div>
     </div>

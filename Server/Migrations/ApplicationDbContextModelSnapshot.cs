@@ -152,14 +152,14 @@ namespace TechieTrading.Server.Migrations
                         new
                         {
                             Id = "StaffRole",
-                            ConcurrencyStamp = "747213a7-ab73-49c9-86c6-7c9e933ecf92",
+                            ConcurrencyStamp = "ce9d71ed-de5d-4877-9842-e6c63950227b",
                             Name = "Staff",
                             NormalizedName = "STAFF"
                         },
                         new
                         {
                             Id = "CustomerRole",
-                            ConcurrencyStamp = "74019446-3d5c-4164-9496-584811ead559",
+                            ConcurrencyStamp = "85f259e3-0277-452c-93cb-b3d5a3636639",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -390,7 +390,7 @@ namespace TechieTrading.Server.Migrations
                         {
                             Id = "LocalStaff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9fe62105-fcba-41e9-9712-b8796b770fb2",
+                            ConcurrencyStamp = "3f7d83a9-aa8d-45bf-9ee5-fd27f618821b",
                             Email = "staff@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Staff",
@@ -398,9 +398,9 @@ namespace TechieTrading.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@LOCALHOST.COM",
                             NormalizedUserName = "STAFF",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBPwHtYPfc8KZuuTzJv16f8zYKQxJCYUDpI4owM0adVIt89uvdjGvFcoC8lh2nsltQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKr5CWX1uZO62TlZ2Ctd40j3FOjMulf8VkQOuEjuf+oHG1+qrw/0m1y5n+9vEOv/0A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4124c786-cec7-4cf2-a9a3-5970a3861f88",
+                            SecurityStamp = "5982fe3c-b923-4985-a160-5723fdcef589",
                             TwoFactorEnabled = false,
                             UserName = "Staff"
                         },
@@ -408,7 +408,7 @@ namespace TechieTrading.Server.Migrations
                         {
                             Id = "GuestCustomer",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6bbfd129-070b-48be-a342-df53c1a8de1a",
+                            ConcurrencyStamp = "428fab89-1158-4365-a110-b143f86ed398",
                             Email = "guest@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Guest",
@@ -416,9 +416,9 @@ namespace TechieTrading.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@LOCALHOST.COM",
                             NormalizedUserName = "GUEST",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFpjdnJO9OoW4O5FRaA4q6Dw8nVFSJ/fN9X36559ck0sYboJ37vT58zEwOVnTI5Y/Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFI5yXo44G7GEkogydIoaP0UfE46pNXtnDlQSd0iVCzpm1h8oLLN6a5fqjOwx7UyhA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3e657745-3f37-4ee9-8720-b7d38ef439ce",
+                            SecurityStamp = "a1c58a88-632a-4527-a22e-bcc23d149d7d",
                             TwoFactorEnabled = false,
                             UserName = "Guest"
                         });
@@ -486,7 +486,7 @@ namespace TechieTrading.Server.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ManufactureDate")
+                    b.Property<DateTime?>("ManufactureDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -532,11 +532,12 @@ namespace TechieTrading.Server.Migrations
                     b.Property<string>("DeliveryType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("OrderDate")
+                    b.Property<DateTime?>("OrderDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("OrderTime")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("OrderTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("StaffId")
                         .HasColumnType("int");
@@ -556,7 +557,7 @@ namespace TechieTrading.Server.Migrations
                             CustomerId = 1,
                             DeliveryType = "Standard-Shipping",
                             OrderDate = new DateTime(2023, 2, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            OrderTime = 163459,
+                            OrderTime = new DateTime(2023, 2, 8, 17, 57, 35, 956, DateTimeKind.Local).AddTicks(3623),
                             StaffId = 1
                         });
                 });
@@ -650,11 +651,12 @@ namespace TechieTrading.Server.Migrations
                     b.Property<string>("DeliveryType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("OrderDate")
+                    b.Property<DateTime?>("OrderDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("OrderTime")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("OrderTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("StaffId")
                         .HasColumnType("int");
@@ -674,7 +676,7 @@ namespace TechieTrading.Server.Migrations
                             CustomerId = 1,
                             DeliveryType = "Store-Pick-Up",
                             OrderDate = new DateTime(2023, 2, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            OrderTime = 163459,
+                            OrderTime = new DateTime(2023, 2, 8, 17, 57, 35, 958, DateTimeKind.Local).AddTicks(1960),
                             StaffId = 1
                         });
                 });

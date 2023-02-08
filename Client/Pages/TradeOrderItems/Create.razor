@@ -1,61 +1,18 @@
-﻿@page "/tradeorderitems/create"
+﻿@page "/tradeorderitems/create/"
 @inject HttpClient _client
-@inject NavigationManager _navmanager
-<h3 class="card-title">Create new trade order</h3>
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New TradeOrderItem</h3>
 <hr />
 <br />
 
-<EditForm Model="@TradeOrderItem" OnValidSubmit="CreateTradeOrderItems">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <div class="form-group">
-        <label>Products: </label>
-        <div>
-            <InputSelect @bind-Value="TradeOrderItem.ProductId" class="form-control">
-                <option value="">-- Select Product --</option>
-                @if (Products != null)
-                {
-                    foreach (var Product in Products)
-                    {
-                        <option value="@Product.Id">@Product.Name</option>}
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => TradeOrderItem.ProductId)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Quantity: </label>
-        <div>
-            
-            <InputNumber @bind-Value="@TradeOrderItem.Quantity" class="form-control" />
-            <ValidationMessage For="@(() => TradeOrderItem.Quantity)" />
-        </div>
-    </div>
-    <button type="submit" class="btn btn-success btn-block">
-        Create TradeOrderItem
-    </button>
-</EditForm>
-
+<FormComponent ButtonText="Create TradeOrderItem" tradeorderitem="tradeorderitem" OnValidSubmit="@CreateTradeOrderItem" />
 
 @code {
-    TradeOrderItem TradeOrderItem = new TradeOrderItem();
-
-
-    private IList<Product> Products;
-
-
-    protected async override Task OnInitializedAsync()
+    TradeOrderItem tradeorderitem = new TradeOrderItem();
+    private async Task CreateTradeOrderItem()
     {
-        Products = await _client.GetFromJsonAsync<List<Product>>($"{Endpoints.ProductsEndpoint}");
-
+        await _client.PostAsJsonAsync(Endpoints.TradeOrderItemsEndpoint, tradeorderitem);
+        _navManager.NavigateTo("/tradeorderitems/");
     }
-    private async Task CreateTradeOrderItems()
-    {
-        await _client.PostAsJsonAsync(Endpoints.TradeOrderItemsEndpoint, TradeOrderItem);
-        _navmanager.NavigateTo("/TradeOrderItems/");
-
-    }
-
-
-
 }

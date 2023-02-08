@@ -21,7 +21,6 @@ namespace TechieTrading.Shared.Domain
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"(6|8|9)\d{7}", ErrorMessage = "Contact Number is not a valid phone number")]
         public string Contact { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime? DateOfBirth { get; set; }
         public string Address { get; set; }
         public List<TradeOrder> TradeOrder { get; set; }

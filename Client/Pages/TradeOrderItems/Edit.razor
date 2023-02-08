@@ -1,0 +1,23 @@
+﻿@page "/tradeorderitems/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Edit TradeOrderItem</h3>
+
+<FormComponent ButtonText="Update" OnValidSubmit="EditTradeOrderItem" tradeorderitem="tradeorderitem" />
+
+@code {
+    [Parameter] public int id { get; set; }
+    TradeOrderItem tradeorderitem = new TradeOrderItem();
+
+    protected async override Task OnParametersSetAsync()
+    {
+        tradeorderitem = await _client.GetFromJsonAsync<TradeOrderItem>($"{Endpoints.TradeOrderItemsEndpoint}/{id}");
+    }
+
+    async Task EditTradeOrderItem()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.TradeOrderItemsEndpoint}/{id}", tradeorderitem);
+        _navManager.NavigateTo("/tradeorderitems/");
+    }
+}

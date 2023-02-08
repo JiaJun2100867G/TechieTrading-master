@@ -1,0 +1,13 @@
+﻿@page "/tradeorderitems/view/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+<h3>View TradeOrderItem</h3>
+<FormComponent tradeorderitem="tradeorderitem" Disabled="true" />
+@code {
+    [Parameter] public int id { get; set; }
+    TradeOrderItem tradeorderitem = new TradeOrderItem();
+    protected async override Task OnParametersSetAsync()
+    {
+        tradeorderitem = await _client.GetFromJsonAsync<TradeOrderItem>($"{Endpoints.TradeOrderItemsEndpoint}/{id}");
+    }
+}

@@ -1,13 +1,13 @@
 ﻿@inject HttpClient _client
 
-<EditForm Model="@sellorderitem" OnValidSubmit="@OnValidSubmit">
+<EditForm Model="@tradeorderitem" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
     @*<fieldset disabled="Disabled">*@
     <div class="form-group">
         <label>Product: </label>
         <div>
-            <InputSelect @bind-Value="@sellorderitem.ProductId" class="form-control" >
+            <InputSelect @bind-Value="@tradeorderitem.ProductId" class="form-control" >
             <option value="">-- Select Product --</option>
                     @if (Products != null)
                     {
@@ -17,14 +17,14 @@
                             }
                     }
                 </InputSelect>
-            <ValidationMessage For="@(() => sellorderitem.ProductId)" />
+            <ValidationMessage For="@(() => tradeorderitem.ProductId)" />
         </div>
     </div>
     <div class="form-group">
         <label>Quantity: </label>
         <div>
-            <InputNumber @bind-Value="@sellorderitem.Quantity" class="form-control" />
-            <ValidationMessage For="@(() => sellorderitem.Quantity)" />
+            <InputNumber @bind-Value="@tradeorderitem.Quantity" class="form-control" />
+            <ValidationMessage For="@(() => tradeorderitem.Quantity)" />
         </div>
     </div>
     @*</fieldset>*@
@@ -34,12 +34,12 @@
             @ButtonText
         </button>
     }
-    <BackToList Target="sellorderitems" />
+    <BackToList Target="tradeorderitems" />
 </EditForm>
 
 @code {
     [Parameter] public bool Disabled { get; set; } = false;
-    [Parameter] public SellOrderItem sellorderitem { get; set; }
+    [Parameter] public TradeOrderItem tradeorderitem { get; set; }
     [Parameter] public string ButtonText { get; set; } = "Save";
     [Parameter] public EventCallback OnValidSubmit { get; set; }
 

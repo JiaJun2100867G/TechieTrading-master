@@ -34,7 +34,7 @@ else
             @foreach (var SellOrderItem in SellOrderItems)
             {
                 <tr>
-                    <td>@SellOrderItem.Product</td>
+                    <td>@SellOrderItem.ProductId</td>
                     <td>@SellOrderItem.Quantity</td>
                     <td>
                         <a href="/sellorderitems/view/@SellOrderItem.Id" class="btn btn-primary">

@@ -38,7 +38,7 @@ else
             {
             <tr>
                 <td>@SellOrder.OrderDate.Value.ToString("dd/MM/yyyy")</td>
-                <td>@SellOrder.OrderTime</td>
+                <td>@SellOrder.OrderTime.Value.ToString("HH:mm:ss")</td>
                 <td>@SellOrder.DeliveryType</td>
                 <td>@SellOrder.Staff.FirstName</td>
                 <td>@SellOrder.Customer.FirstName</td>
