@@ -21,7 +21,5 @@ namespace TechieTrading.Shared.Domain
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"(6|8|9)\d{7}", ErrorMessage = "Contact Number is not a valid phone number")]
         public string Contact { get; set; }
-        public virtual List<TradeOrder> TradeOrder { get; set; }
-        public virtual List<SellOrder> SellOrder { get; set; }
     }
 }

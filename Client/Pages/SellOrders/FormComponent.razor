@@ -14,14 +14,18 @@
     <div class="form-group">
         <label>Order Time: </label>
         <div>
-            <InputNumber type="time" @bind-Value="@sellorder.OrderTime" class="form-control" />
+            <InputText @bind-Value="@sellorder.OrderTime" class="form-control" />
             <ValidationMessage For="@(() => sellorder.OrderTime)" />
         </div>
     </div>
     <div class="form-group">
         <label>Delivery Type: </label>
         <div>
-            <InputText @bind-Value="@sellorder.DeliveryType" class="form-control" />
+            <InputSelect @bind-Value="@sellorder.DeliveryType" class="form-control" >
+                <option value="">-- Select Delivery Type --</option>
+                <option value="Store-Pick-Up">Store-Pick-Up</option>
+                <option value="Standard-Shipping">Standard-Shipping</option>
+            </InputSelect>
             <ValidationMessage For="@(() => sellorder.DeliveryType)" />
         </div>
     </div>
@@ -58,7 +62,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label>Customer: </label>
+        <label>Order Item: </label>
         <div>
             <InputSelect @bind-Value="@sellorder.SellOrderItem" class="form-control" >
             <option value="">-- Select Item --</option>

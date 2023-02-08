@@ -37,8 +37,8 @@ else
             @foreach (var TradeOrder in TradeOrders)
             {
             <tr>
-                <td>@TradeOrder.OrderDate.Value.ToString("dd/MM/YYYY")</td>
-                <td>@TradeOrder.OrderTime.Value.ToString("HH:mm:ss")</td>
+                <td>@TradeOrder.OrderDate.Value.ToString("dd/MM/yyyy")</td>
+                <td>@TradeOrder.OrderTime</td>
                 <td>@TradeOrder.DeliveryType</td>
                 <td>@TradeOrder.Staff.FirstName</td>
                 <td>@TradeOrder.Customer.FirstName</td>

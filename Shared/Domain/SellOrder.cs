@@ -8,7 +8,8 @@ namespace TechieTrading.Shared.Domain
     {
         [Required]
         public DateTime? OrderDate { get; set; }
-        public DateTime? OrderTime { get; set; }
+        [RegularExpression(@"(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])", ErrorMessage = "Time Format: HH:mm:ss")]
+        public string OrderTime { get; set; }
         public string DeliveryType { get; set; }
         public int StaffId { get; set; }
         public virtual Staff Staff { get; set; }

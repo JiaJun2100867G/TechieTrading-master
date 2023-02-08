@@ -5,6 +5,22 @@
     <ValidationSummary />
     @*<fieldset disabled="Disabled">*@
     <div class="form-group">
+        <label>Order: </label>
+        <div>
+            <InputSelect @bind-Value="@tradeorderitem.TradeOrderId" class="form-control" >
+            <option value="">-- Select Order --</option>
+                    @if (TradeOrders != null)
+                    {
+                        foreach (var tradeorder in TradeOrders)
+                            {
+                                <option value="@tradeorder.Id">@tradeorder.Customer.FirstName - @tradeorder.OrderDate - @tradeorder.OrderTime</option>
+                            }
+                    }
+                </InputSelect>
+            <ValidationMessage For="@(() => tradeorderitem.TradeOrderId)" />
+        </div>
+    </div>
+    <div class="form-group">
         <label>Product: </label>
         <div>
             <InputSelect @bind-Value="@tradeorderitem.ProductId" class="form-control" >
@@ -44,9 +60,11 @@
     [Parameter] public EventCallback OnValidSubmit { get; set; }
 
     private IList<Product> Products;
+    private IList<TradeOrder> TradeOrders;
 
     protected async override Task OnInitializedAsync()
     {
         Products = await _client.GetFromJsonAsync<List<Product>>($"{Endpoints.ProductsEndpoint}");
+        TradeOrders = await _client.GetFromJsonAsync<List<TradeOrder>>($"{Endpoints.TradeOrdersEndpoint}");
     }
 }

@@ -30,7 +30,7 @@ namespace TechieTrading.Server.Controllers
         {
             //Refactored
             //return await _context.SellOrderItems.ToListAsync();
-            var SellOrderItems = await _unitOfWork.SellOrderItems.GetAll();
+            var SellOrderItems = await _unitOfWork.SellOrderItems.GetAll(includes: q => q.Include(x => x.Product));
             return Ok(SellOrderItems);
         }
 

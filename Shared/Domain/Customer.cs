@@ -23,7 +23,5 @@ namespace TechieTrading.Shared.Domain
         public string Contact { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string Address { get; set; }
-        public List<TradeOrder> TradeOrder { get; set; }
-        public List<SellOrder> SellOrder { get; set; }
     }
 }

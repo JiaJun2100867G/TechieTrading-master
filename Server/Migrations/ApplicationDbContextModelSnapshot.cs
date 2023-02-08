@@ -152,14 +152,14 @@ namespace TechieTrading.Server.Migrations
                         new
                         {
                             Id = "StaffRole",
-                            ConcurrencyStamp = "ce9d71ed-de5d-4877-9842-e6c63950227b",
+                            ConcurrencyStamp = "59be8676-47c9-479b-b909-49849d2e1722",
                             Name = "Staff",
                             NormalizedName = "STAFF"
                         },
                         new
                         {
                             Id = "CustomerRole",
-                            ConcurrencyStamp = "85f259e3-0277-452c-93cb-b3d5a3636639",
+                            ConcurrencyStamp = "c47cf51b-e9c7-4229-ae93-84cfe977a53f",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -285,36 +285,6 @@ namespace TechieTrading.Server.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ProductSellOrderItem", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SellOrderItemId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductId", "SellOrderItemId");
-
-                    b.HasIndex("SellOrderItemId");
-
-                    b.ToTable("ProductSellOrderItem");
-                });
-
-            modelBuilder.Entity("ProductTradeOrderItem", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TradeOrderItemId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductId", "TradeOrderItemId");
-
-                    b.HasIndex("TradeOrderItemId");
-
-                    b.ToTable("ProductTradeOrderItem");
-                });
-
             modelBuilder.Entity("TechieTrading.Server.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -390,7 +360,7 @@ namespace TechieTrading.Server.Migrations
                         {
                             Id = "LocalStaff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3f7d83a9-aa8d-45bf-9ee5-fd27f618821b",
+                            ConcurrencyStamp = "1bae33d3-7aef-4cdf-a939-4268b38ad163",
                             Email = "staff@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Staff",
@@ -398,9 +368,9 @@ namespace TechieTrading.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@LOCALHOST.COM",
                             NormalizedUserName = "STAFF",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKr5CWX1uZO62TlZ2Ctd40j3FOjMulf8VkQOuEjuf+oHG1+qrw/0m1y5n+9vEOv/0A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK+SY/BEHS7ZL547FmHvUAWJPPRzvfBEMoP2RKJcnkJ26FjEklbPZ7NJcQL7VpBFzA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5982fe3c-b923-4985-a160-5723fdcef589",
+                            SecurityStamp = "39d59272-804a-467b-852b-d4bcd2d8bd95",
                             TwoFactorEnabled = false,
                             UserName = "Staff"
                         },
@@ -408,7 +378,7 @@ namespace TechieTrading.Server.Migrations
                         {
                             Id = "GuestCustomer",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "428fab89-1158-4365-a110-b143f86ed398",
+                            ConcurrencyStamp = "0191939a-970c-49d7-ae1f-c55af5e36dfa",
                             Email = "guest@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Guest",
@@ -416,9 +386,9 @@ namespace TechieTrading.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@LOCALHOST.COM",
                             NormalizedUserName = "GUEST",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFI5yXo44G7GEkogydIoaP0UfE46pNXtnDlQSd0iVCzpm1h8oLLN6a5fqjOwx7UyhA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBXaKloONfnhTj56uDEOfEIEAiiRDPZOHdbdXpu833/IfeXW3RHv0etgL7y7ll+f3w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a1c58a88-632a-4527-a22e-bcc23d149d7d",
+                            SecurityStamp = "2c0b78d8-9a70-40ac-8b65-5a8c7a2e3e8a",
                             TwoFactorEnabled = false,
                             UserName = "Guest"
                         });
@@ -536,8 +506,8 @@ namespace TechieTrading.Server.Migrations
                         .IsRequired()
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("OrderTime")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("OrderTime")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StaffId")
                         .HasColumnType("int");
@@ -557,7 +527,7 @@ namespace TechieTrading.Server.Migrations
                             CustomerId = 1,
                             DeliveryType = "Standard-Shipping",
                             OrderDate = new DateTime(2023, 2, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            OrderTime = new DateTime(2023, 2, 8, 17, 57, 35, 956, DateTimeKind.Local).AddTicks(3623),
+                            OrderTime = "23:38:09",
                             StaffId = 1
                         });
                 });
@@ -579,6 +549,8 @@ namespace TechieTrading.Server.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.HasIndex("SellOrderId");
 
@@ -655,8 +627,8 @@ namespace TechieTrading.Server.Migrations
                         .IsRequired()
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("OrderTime")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("OrderTime")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StaffId")
                         .HasColumnType("int");
@@ -676,7 +648,7 @@ namespace TechieTrading.Server.Migrations
                             CustomerId = 1,
                             DeliveryType = "Store-Pick-Up",
                             OrderDate = new DateTime(2023, 2, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            OrderTime = new DateTime(2023, 2, 8, 17, 57, 35, 958, DateTimeKind.Local).AddTicks(1960),
+                            OrderTime = "23:38:09",
                             StaffId = 1
                         });
                 });
@@ -698,6 +670,8 @@ namespace TechieTrading.Server.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.HasIndex("TradeOrderId");
 
@@ -764,46 +738,16 @@ namespace TechieTrading.Server.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProductSellOrderItem", b =>
-                {
-                    b.HasOne("TechieTrading.Shared.Domain.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TechieTrading.Shared.Domain.SellOrderItem", null)
-                        .WithMany()
-                        .HasForeignKey("SellOrderItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ProductTradeOrderItem", b =>
-                {
-                    b.HasOne("TechieTrading.Shared.Domain.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TechieTrading.Shared.Domain.TradeOrderItem", null)
-                        .WithMany()
-                        .HasForeignKey("TradeOrderItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("TechieTrading.Shared.Domain.SellOrder", b =>
                 {
                     b.HasOne("TechieTrading.Shared.Domain.Customer", "Customer")
-                        .WithMany("SellOrder")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TechieTrading.Shared.Domain.Staff", "Staff")
-                        .WithMany("SellOrder")
+                        .WithMany()
                         .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -815,25 +759,31 @@ namespace TechieTrading.Server.Migrations
 
             modelBuilder.Entity("TechieTrading.Shared.Domain.SellOrderItem", b =>
                 {
-                    b.HasOne("TechieTrading.Shared.Domain.SellOrder", "SellOrder")
+                    b.HasOne("TechieTrading.Shared.Domain.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TechieTrading.Shared.Domain.SellOrder", null)
                         .WithMany("SellOrderItem")
                         .HasForeignKey("SellOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("SellOrder");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("TechieTrading.Shared.Domain.TradeOrder", b =>
                 {
                     b.HasOne("TechieTrading.Shared.Domain.Customer", "Customer")
-                        .WithMany("TradeOrder")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TechieTrading.Shared.Domain.Staff", "Staff")
-                        .WithMany("TradeOrder")
+                        .WithMany()
                         .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -845,32 +795,24 @@ namespace TechieTrading.Server.Migrations
 
             modelBuilder.Entity("TechieTrading.Shared.Domain.TradeOrderItem", b =>
                 {
-                    b.HasOne("TechieTrading.Shared.Domain.TradeOrder", "TradeOrder")
+                    b.HasOne("TechieTrading.Shared.Domain.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TechieTrading.Shared.Domain.TradeOrder", null)
                         .WithMany("TradeOrderItem")
                         .HasForeignKey("TradeOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TradeOrder");
-                });
-
-            modelBuilder.Entity("TechieTrading.Shared.Domain.Customer", b =>
-                {
-                    b.Navigation("SellOrder");
-
-                    b.Navigation("TradeOrder");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("TechieTrading.Shared.Domain.SellOrder", b =>
                 {
                     b.Navigation("SellOrderItem");
-                });
-
-            modelBuilder.Entity("TechieTrading.Shared.Domain.Staff", b =>
-                {
-                    b.Navigation("SellOrder");
-
-                    b.Navigation("TradeOrder");
                 });
 
             modelBuilder.Entity("TechieTrading.Shared.Domain.TradeOrder", b =>

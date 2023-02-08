@@ -254,7 +254,7 @@ namespace TechieTrading.Server.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OrderTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    OrderTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeliveryType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StaffId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false)
@@ -283,7 +283,7 @@ namespace TechieTrading.Server.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OrderTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    OrderTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeliveryType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StaffId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false)
@@ -319,6 +319,12 @@ namespace TechieTrading.Server.Migrations
                 {
                     table.PrimaryKey("PK_SellOrderItem", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_SellOrderItem_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_SellOrderItem_SellOrder_SellOrderId",
                         column: x => x.SellOrderId,
                         principalTable: "SellOrder",
@@ -340,57 +346,15 @@ namespace TechieTrading.Server.Migrations
                 {
                     table.PrimaryKey("PK_TradeOrderItem", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_TradeOrderItem_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_TradeOrderItem_TradeOrder_TradeOrderId",
                         column: x => x.TradeOrderId,
                         principalTable: "TradeOrder",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductSellOrderItem",
-                columns: table => new
-                {
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    SellOrderItemId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductSellOrderItem", x => new { x.ProductId, x.SellOrderItemId });
-                    table.ForeignKey(
-                        name: "FK_ProductSellOrderItem_Product_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Product",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductSellOrderItem_SellOrderItem_SellOrderItemId",
-                        column: x => x.SellOrderItemId,
-                        principalTable: "SellOrderItem",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductTradeOrderItem",
-                columns: table => new
-                {
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    TradeOrderItemId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductTradeOrderItem", x => new { x.ProductId, x.TradeOrderItemId });
-                    table.ForeignKey(
-                        name: "FK_ProductTradeOrderItem_Product_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Product",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductTradeOrderItem_TradeOrderItem_TradeOrderItemId",
-                        column: x => x.TradeOrderItemId,
-                        principalTable: "TradeOrderItem",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -400,8 +364,8 @@ namespace TechieTrading.Server.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "StaffRole", "ce9d71ed-de5d-4877-9842-e6c63950227b", "Staff", "STAFF" },
-                    { "CustomerRole", "85f259e3-0277-452c-93cb-b3d5a3636639", "Customer", "CUSTOMER" }
+                    { "StaffRole", "59be8676-47c9-479b-b909-49849d2e1722", "Staff", "STAFF" },
+                    { "CustomerRole", "c47cf51b-e9c7-4229-ae93-84cfe977a53f", "Customer", "CUSTOMER" }
                 });
 
             migrationBuilder.InsertData(
@@ -409,8 +373,8 @@ namespace TechieTrading.Server.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "LocalStaff", 0, "3f7d83a9-aa8d-45bf-9ee5-fd27f618821b", "staff@localhost.com", false, "Staff", "Admin", false, null, "STAFF@LOCALHOST.COM", "STAFF", "AQAAAAEAACcQAAAAEKr5CWX1uZO62TlZ2Ctd40j3FOjMulf8VkQOuEjuf+oHG1+qrw/0m1y5n+9vEOv/0A==", null, false, "5982fe3c-b923-4985-a160-5723fdcef589", false, "Staff" },
-                    { "GuestCustomer", 0, "428fab89-1158-4365-a110-b143f86ed398", "guest@localhost.com", false, "Guest", "Customer", false, null, "GUEST@LOCALHOST.COM", "GUEST", "AQAAAAEAACcQAAAAEFI5yXo44G7GEkogydIoaP0UfE46pNXtnDlQSd0iVCzpm1h8oLLN6a5fqjOwx7UyhA==", null, false, "a1c58a88-632a-4527-a22e-bcc23d149d7d", false, "Guest" }
+                    { "LocalStaff", 0, "1bae33d3-7aef-4cdf-a939-4268b38ad163", "staff@localhost.com", false, "Staff", "Admin", false, null, "STAFF@LOCALHOST.COM", "STAFF", "AQAAAAEAACcQAAAAEK+SY/BEHS7ZL547FmHvUAWJPPRzvfBEMoP2RKJcnkJ26FjEklbPZ7NJcQL7VpBFzA==", null, false, "39d59272-804a-467b-852b-d4bcd2d8bd95", false, "Staff" },
+                    { "GuestCustomer", 0, "0191939a-970c-49d7-ae1f-c55af5e36dfa", "guest@localhost.com", false, "Guest", "Customer", false, null, "GUEST@LOCALHOST.COM", "GUEST", "AQAAAAEAACcQAAAAEBXaKloONfnhTj56uDEOfEIEAiiRDPZOHdbdXpu833/IfeXW3RHv0etgL7y7ll+f3w==", null, false, "2c0b78d8-9a70-40ac-8b65-5a8c7a2e3e8a", false, "Guest" }
                 });
 
             migrationBuilder.InsertData(
@@ -440,12 +404,12 @@ namespace TechieTrading.Server.Migrations
             migrationBuilder.InsertData(
                 table: "SellOrder",
                 columns: new[] { "Id", "CustomerId", "DeliveryType", "OrderDate", "OrderTime", "StaffId" },
-                values: new object[] { 1, 1, "Standard-Shipping", new DateTime(2023, 2, 8, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2023, 2, 8, 17, 57, 35, 956, DateTimeKind.Local).AddTicks(3623), 1 });
+                values: new object[] { 1, 1, "Standard-Shipping", new DateTime(2023, 2, 8, 0, 0, 0, 0, DateTimeKind.Local), "23:38:09", 1 });
 
             migrationBuilder.InsertData(
                 table: "TradeOrder",
                 columns: new[] { "Id", "CustomerId", "DeliveryType", "OrderDate", "OrderTime", "StaffId" },
-                values: new object[] { 1, 1, "Store-Pick-Up", new DateTime(2023, 2, 8, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2023, 2, 8, 17, 57, 35, 958, DateTimeKind.Local).AddTicks(1960), 1 });
+                values: new object[] { 1, 1, "Store-Pick-Up", new DateTime(2023, 2, 8, 0, 0, 0, 0, DateTimeKind.Local), "23:38:09", 1 });
 
             migrationBuilder.InsertData(
                 table: "SellOrderItem",
@@ -523,16 +487,6 @@ namespace TechieTrading.Server.Migrations
                 columns: new[] { "SubjectId", "SessionId", "Type" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductSellOrderItem_SellOrderItemId",
-                table: "ProductSellOrderItem",
-                column: "SellOrderItemId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductTradeOrderItem_TradeOrderItemId",
-                table: "ProductTradeOrderItem",
-                column: "TradeOrderItemId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_SellOrder_CustomerId",
                 table: "SellOrder",
                 column: "CustomerId");
@@ -541,6 +495,11 @@ namespace TechieTrading.Server.Migrations
                 name: "IX_SellOrder_StaffId",
                 table: "SellOrder",
                 column: "StaffId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SellOrderItem_ProductId",
+                table: "SellOrderItem",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SellOrderItem_SellOrderId",
@@ -556,6 +515,11 @@ namespace TechieTrading.Server.Migrations
                 name: "IX_TradeOrder_StaffId",
                 table: "TradeOrder",
                 column: "StaffId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TradeOrderItem_ProductId",
+                table: "TradeOrderItem",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TradeOrderItem_TradeOrderId",
@@ -587,10 +551,10 @@ namespace TechieTrading.Server.Migrations
                 name: "PersistedGrants");
 
             migrationBuilder.DropTable(
-                name: "ProductSellOrderItem");
+                name: "SellOrderItem");
 
             migrationBuilder.DropTable(
-                name: "ProductTradeOrderItem");
+                name: "TradeOrderItem");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -599,16 +563,10 @@ namespace TechieTrading.Server.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "SellOrderItem");
+                name: "SellOrder");
 
             migrationBuilder.DropTable(
                 name: "Product");
-
-            migrationBuilder.DropTable(
-                name: "TradeOrderItem");
-
-            migrationBuilder.DropTable(
-                name: "SellOrder");
 
             migrationBuilder.DropTable(
                 name: "TradeOrder");

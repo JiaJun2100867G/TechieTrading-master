@@ -13,7 +13,5 @@ namespace TechieTrading.Shared.Domain
         public int Quantity { get; set; }
         public double Price { get; set; }
         public DateTime? ManufactureDate { get; set; }
-        public List<TradeOrderItem> TradeOrderItem { get; set; }
-        public List<SellOrderItem> SellOrderItem { get; set; }
     }
 }

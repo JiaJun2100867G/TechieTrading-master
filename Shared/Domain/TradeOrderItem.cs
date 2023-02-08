@@ -7,8 +7,7 @@ namespace TechieTrading.Shared.Domain
     {
         public int Quantity { get; set; }
         public int TradeOrderId { get; set; }
-        public virtual TradeOrder TradeOrder { get; set; }
         public int ProductId { get; set; }
-        public virtual List<Product> Product { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

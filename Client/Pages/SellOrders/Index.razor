@@ -11,7 +11,7 @@
 
 <a href="/sellorders/create" class="btn btn-secondary">
     <span class="oi oi-plus"></span>
-    Create New Product
+    Create New SellOrder
 </a>
 <br />
 <br />
@@ -38,7 +38,7 @@ else
             {
             <tr>
                 <td>@SellOrder.OrderDate.Value.ToString("dd/MM/yyyy")</td>
-                <td>@SellOrder.OrderTime.Value.ToString("HH:mm:ss")</td>
+                <td>@SellOrder.OrderTime</td>
                 <td>@SellOrder.DeliveryType</td>
                 <td>@SellOrder.Staff.FirstName</td>
                 <td>@SellOrder.Customer.FirstName</td>

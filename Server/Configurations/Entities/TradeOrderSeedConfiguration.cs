@@ -13,7 +13,7 @@ namespace TechieTrading.Server.Configurations.Entities
                 {
                     Id = 1,
                     OrderDate = DateTime.Today.Date,
-                    OrderTime = DateTime.Now,
+                    OrderTime = DateTime.Now.ToString("HH:mm:ss"),
                     DeliveryType = "Store-Pick-Up",
                     StaffId = 1,
                     CustomerId = 1

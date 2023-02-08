@@ -25,8 +25,9 @@ else
     <table class="table table-responsive">
         <thead>
             <tr>
-                <th>ProductId</th>
+                <th>Product</th>
                 <th>Quantity</th>
+                <th>TradeOrderId</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -34,8 +35,9 @@ else
             @foreach (var TradeOrderItem in TradeOrderItems)
             {
             <tr>
-                <td>@TradeOrderItem.ProductId</td>
+                <td>@TradeOrderItem.Product.Name</td>
                 <td>@TradeOrderItem.Quantity</td>
+                <td>@TradeOrderItem.TradeOrderId</td>
                 <td>
                     <a href="/tradeorderitems/view/@TradeOrderItem.Id" class="btn btn-primary">
                         <span class="oi oi-book"></span>

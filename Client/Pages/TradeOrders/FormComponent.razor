@@ -14,14 +14,18 @@
     <div class="form-group">
         <label>Order Time: </label>
         <div>
-            <InputNumber type="time" @bind-Value="@tradeorder.OrderTime" class="form-control" />
+            <InputText @bind-Value="@tradeorder.OrderTime" class="form-control" />
             <ValidationMessage For="@(() => tradeorder.OrderTime)" />
         </div>
     </div>
     <div class="form-group">
         <label>Delivery Type: </label>
         <div>
-            <InputText @bind-Value="@tradeorder.DeliveryType" class="form-control" />
+            <InputSelect @bind-Value="@tradeorder.DeliveryType" class="form-control" >
+                <option value="">-- Select Delivery Type --</option>
+                <option value="Store-Pick-Up">Store-Pick-Up</option>
+                <option value="Standard-Shipping">Standard-Shipping</option>
+            <</InputSelect>/>
             <ValidationMessage For="@(() => tradeorder.DeliveryType)" />
         </div>
     </div>
@@ -55,6 +59,22 @@
             <ValidationMessage For="@(() => tradeorder.CustomerId)" />
         </div>
     </div>
+    <div class="form-group">
+        <label>Order Item: </label>
+        <div>
+            <InputSelect @bind-Value="@tradeorder.TradeOrderItem" class="form-control" >
+            <option value="">-- Select Item --</option>
+                    @if (TradeOrderItems != null)
+                    {
+                        foreach (var tradeorderitem in TradeOrderItems)
+                            {
+                                <option value="@tradeorderitem.Id">@tradeorderitem.Product - @tradeorderitem.Quantity</option>
+                            }
+                    }
+                </InputSelect>
+            <ValidationMessage For="@(() => tradeorder.TradeOrderItem)" />
+        </div>
+    </div>
     @*</fieldset>*@
     @if (!Disabled)
     {
@@ -73,10 +93,12 @@
 
     private IList<Staff> Staffs;
     private IList<Customer> Customers;
+    private IList<TradeOrderItem> TradeOrderItems;
 
     protected async override Task OnInitializedAsync()
     {
         Staffs = await _client.GetFromJsonAsync<List<Staff>>($"{Endpoints.StaffsEndpoint}");
         Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
+        TradeOrderItems = await _client.GetFromJsonAsync<List<TradeOrderItem>>($"{Endpoints.TradeOrderItemsEndpoint}");
     }
 }
